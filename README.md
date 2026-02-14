@@ -13,7 +13,16 @@
 - Member 2: Aardra S S - LBSITW
 
 ### Hosted Project Link
-[mention your project hosted link here]
+style-mee.vercel.app
+
+[The app runs correctly in the local environment.  
+The deployed version currently shows a 500 server error due to hosting configuration issues.
+
+To demonstrate functionality, we have included:
+- ✅ Screenshots of the app running locally  
+- ✅ A demo video of the app running locally  
+
+These show the full working features of StyleMe.]
 
 ### Project Description
 StyleMe is a web app where users share outfit photos and get feedback through simple polls. It includes a blur tool so users can hide parts of their images for privacy. Built using HTML, JavaScript, and Firebase for authentication, storage, and database.
