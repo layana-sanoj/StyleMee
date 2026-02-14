@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleMe | Fashion & Style Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --barbie-pink: #E91E63;
+            --barbie-light: #F48FB1;
+            --barbie-dark: #C2185B;
+            --soft-pink: #FCE4EC;
+            --cream: #FFF9F5;
+            --gold: #D4AF37;
+            --text-dark: #4A4A4A;
+            --text-light: #8E8E8E;
+            --white: #FFFFFF;
+            --border: #F8BBD0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E9 50%, #FFF0F8 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--text-dark);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Elegant floating elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(233, 30, 99, 0.08) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -50%;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(244, 143, 177, 0.06) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            font-weight: 600;
+            color: var(--barbie-pink);
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+
+        /* Brand Styling */
+        .brand-container {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 
+                0 10px 30px rgba(233, 30, 99, 0.3),
+                0 0 0 8px rgba(255, 255, 255, 0.9),
+                0 0 0 12px rgba(233, 30, 99, 0.1);
+            position: relative;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .brand-logo::before {
+            content: '♡';
+            font-size: 42px;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        .brand-tagline {
+            color: var(--barbie-dark);
+            font-size: 1.1em;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 
+                0 20px 60px rgba(233, 30, 99, 0.12),
+                0 8px 16px rgba(0, 0, 0, 0.04);
+            max-width: 540px;
+            margin: 0 auto 40px;
+            border: 2px solid var(--soft-pink);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light), var(--gold));
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover::before {
+            opacity: 0.3;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 
+                0 30px 80px rgba(233, 30, 99, 0.18),
+                0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Input Styling */
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            background: var(--cream);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 20px;
+            border: 2px dashed var(--barbie-light);
+            border-radius: 16px;
+            background: var(--soft-pink);
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: var(--barbie-dark);
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: var(--barbie-pink);
+            background: #FFE4E9;
+            border-style: solid;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--barbie-pink);
+            background: var(--white);
+            box-shadow: 
+                0 0 0 4px rgba(233, 30, 99, 0.1),
+                0 4px 12px rgba(233, 30, 99, 0.15);
+        }
+
+        input::placeholder {
+            color: var(--barbie-light);
+            font-weight: 400;
+        }
+
+        /* Button Styling */
+        button {
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            color: var(--white);
+            border: none;
+            padding: 16px 36px;
+            border-radius: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 8px 4px;
+            letter-spacing: 0.5px;
+            box-shadow: 
+                0 8px 20px rgba(233, 30, 99, 0.25),
+                0 4px 8px rgba(233, 30, 99, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 28px rgba(233, 30, 99, 0.35),
+                0 6px 12px rgba(233, 30, 99, 0.2);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Outline Button */
+        button.outline {
+            background: transparent;
+            color: var(--barbie-pink);
+            border: 2px solid var(--barbie-pink);
+            box-shadow: none;
+        }
+
+        button.outline:hover {
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            color: var(--white);
+            box-shadow: 
+                0 8px 20px rgba(233, 30, 99, 0.25),
+                0 4px 8px rgba(233, 30, 99, 0.15);
+        }
+
+        /* Secondary Button */
+        button.secondary {
+            background: linear-gradient(135deg, var(--text-light), #B0B0B0);
+            box-shadow: 
+                0 8px 20px rgba(142, 142, 142, 0.2),
+                0 4px 8px rgba(142, 142, 142, 0.1);
+        }
+
+        button.secondary:hover {
+            box-shadow: 
+                0 12px 28px rgba(142, 142, 142, 0.3),
+                0 6px 12px rgba(142, 142, 142, 0.15);
+        }
+
+        /* Text Styling */
+        p {
+            color: var(--text-light);
+            text-align: center;
+            margin: 24px 0 12px;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        /* Canvas Styling */
+        #canvas {
+            border: 3px solid var(--border);
+            border-radius: 16px;
+            display: block;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 
+                0 8px 24px rgba(233, 30, 99, 0.12),
+                0 4px 8px rgba(0, 0, 0, 0.04);
+            background: var(--white);
+            margin: 0 auto 24px;
+        }
+
+        /* Feed and Posts Styling */
+        #feed,
+        #myPosts {
+            margin-top: 24px;
+        }
+
+        .post-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 2px solid var(--soft-pink);
+            box-shadow: 
+                0 8px 24px rgba(233, 30, 99, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .post-card::after {
+            content: '♡';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--barbie-light);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover::after {
+            opacity: 1;
+            transform: scale(1.2);
+            color: var(--barbie-pink);
+        }
+
+        .post-card:hover {
+            box-shadow: 
+                0 16px 40px rgba(233, 30, 99, 0.15),
+                0 8px 16px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px);
+            border-color: var(--barbie-light);
+        }
+
+        .post-card img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 2px solid var(--soft-pink);
+        }
+
+        .post-card h3 {
+            color: var(--barbie-pink);
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .post-card p {
+            color: var(--text-dark);
+            text-align: left;
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+        .post-card button {
+            font-size: 14px;
+            padding: 12px 24px;
+            margin-top: 12px;
+        }
+
+        /* User Display */
+        #userDisplay {
+            color: var(--barbie-pink);
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-top: 28px;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        /* Page Container */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 48px 0 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--barbie-pink), transparent);
+            border-radius: 2px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--barbie-dark);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Action Buttons Container */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 28px 0;
+            position: relative;
+        }
+
+        .divider::after {
+            content: '♡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 0 12px;
+            color: var(--barbie-light);
+            font-size: 16px;
+        }
+
+        /* Decorative Elements */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--barbie-light);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleFloat 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .card {
+                padding: 36px 28px;
+            }
+
+            button {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+
+            .brand-logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .brand-logo::before {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .card {
+                padding: 28px 20px;
+            }
+
+            .nav-buttons,
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+                margin: 6px 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--soft-pink);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-light));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--barbie-dark), var(--barbie-pink));
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state h3 {
+            color: var(--barbie-pink);
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body>
+
+<!-- WELCOME PAGE -->
+<div id="welcomePage" class="page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    <div class="card">
+        <h2>Welcome Gorgeous</h2>
+        <p>Join our beautiful community of fashion enthusiasts</p>
+        <div class="nav-buttons">
+            <button onclick="showPage('signupPage')">Create Account</button>
+            <button class="outline" onclick="showPage('loginPage')">Sign In</button>
+        </div>
+    </div>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="hidden page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    <div class="card">
+        <h2>Welcome Back</h2>
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input id="loginEmail" type="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter your password">
+        </div>
+        <button onclick="login()" style="width: 100%; margin-top: 8px;">Sign In</button>
+        <div class="divider"></div>
+        <p>New to our community?</p>
+        <button class="outline" onclick="showPage('signupPage')" style="width: 100%;">Create Account</button>
+    </div>
+</div>
+
+<!-- SIGNUP PAGE -->
+<div id="signupPage" class="hidden page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    <div class="card">
+        <h2>Join Our Community</h2>
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input id="signupEmail" type="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input id="signupPassword" type="password" placeholder="Create a password">
+        </div>
+        <button onclick="signup()" style="width: 100%; margin-top: 8px;">Create Account</button>
+        <div class="divider"></div>
+        <p>Already have an account?</p>
+        <button class="outline" onclick="showPage('loginPage')" style="width: 100%;">Sign In</button>
+    </div>
+</div>
+
+<!-- HOME PAGE -->
+<div id="homePage" class="hidden page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    <div class="card">
+        <h2>Your Dashboard</h2>
+        <p>What would you like to do today?</p>
+        <div class="action-buttons">
+            <button onclick="showPage('feedPage')">Browse Feed</button>
+            <button onclick="showPage('profilePage')">My Profile</button>
+        </div>
+        <div class="divider"></div>
+        <div class="action-buttons">
+            <button class="secondary" onclick="logout()">Sign Out</button>
+        </div>
+    </div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="profilePage" class="hidden page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    
+    <div class="card">
+        <h2>Share Your Style</h2>
+        
+        <!-- IMAGE UPLOAD -->
+        <div class="form-group">
+            <label class="form-label">Upload Photo</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+
+        <!-- CANVAS -->
+        <canvas id="canvas" width="300" height="300"></canvas>
+
+        <!-- BLUR BUTTON -->
+        <button type="button" onclick="enableBlurSelect()" style="width: 100%;">
+            Select Blur Area
+        </button>
+
+        <div class="divider"></div>
+
+        <!-- CAPTION -->
+        <div class="form-group">
+            <label class="form-label">Caption</label>
+            <input id="question" placeholder="What's your style question?">
+        </div>
+
+        <!-- OPTIONS -->
+        <div class="form-group">
+            <label class="form-label">Option A</label>
+            <input id="optA" placeholder="First choice">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Option B</label>
+            <input id="optB" placeholder="Second choice">
+        </div>
+
+        <!-- POST BUTTON -->
+        <button type="button" onclick="createPost()" style="width: 100%; margin-top: 8px;">
+            Post Outfit
+        </button>
+
+        <h2 id="userDisplay"></h2>
+    </div>
+
+    <div class="section-header">
+        <h2>Your Posts</h2>
+    </div>
+    <div id="myPosts"></div>
+
+    <div class="action-buttons">
+        <button type="button" onclick="showPage('feedPage')">
+            Back to Feed
+        </button>
+        <button class="outline" type="button" onclick="showPage('homePage')">
+            Dashboard
+        </button>
+    </div>
+</div>
+
+<!-- FEED PAGE -->
+<div id="feedPage" class="hidden page-container">
+    <div class="brand-container">
+        <div class="brand-logo"></div>
+        <h1>StyleMe</h1>
+        <p class="brand-tagline">Fashion & Style Community</p>
+    </div>
+    
+    <div class="card">
+        <h2>Community Feed</h2>
+        <p>Discover the latest styles from our community</p>
+        <!-- Feed display -->
+        <div id="feed"></div>
+    </div>
+    
+    <div class="action-buttons">
+        <button onclick="showPage('homePage')">Dashboard</button>
+        <button class="outline" onclick="showPage('profilePage')">Create Post</button>
+    </div>
+</div>
+
+<script src="client.js"></script>
+
+</body>
+</html>
